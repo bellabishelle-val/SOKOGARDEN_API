@@ -137,7 +137,7 @@ def Addproducts():
 @app.route("/api/get_products", methods = ["GET"])
 def get_products():
     # create a connection to db
-    connection = pymysql.connect(host = "localhost", user = "root", password = "", database = "sokogardenonline")
+    connection = pymysql.connect(host="localhost", user="root", password="", database="sokogardenonline")
 
     #create a cursor
     cursor = connection.cursor(pymysql.cursors.DictCursor)
@@ -152,7 +152,7 @@ def get_products():
 
     return jsonify(products)
 
-#Mpesa Payment Route/Endpoint 
+# Mpesa Payment Route/Endpoint 
 import requests
 import datetime
 import base64
@@ -170,8 +170,12 @@ def mpesa_payment():
  
         api_URL = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"  # AUTH URL
         r = requests.get(api_URL, auth=HTTPBasicAuth(consumer_key, consumer_secret))
+
+        print("This is content inside variable data : ", r)
  
         data = r.json()
+
+        print("This is the content inside of variable data : ", data)
         access_token = "Bearer" + ' ' + data['access_token']
  
         #  GETTING THE PASSWORD
